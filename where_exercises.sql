@@ -52,9 +52,9 @@ where last_name LIKE 'e%';
 
 SELECT last_name, first_name
 from employees
-where last_name LIKE '%E' or 'E%';
+where last_name LIKE '%E' OR  last_name LIKE 'E%';
 
--- 24292 with e start or e end
+-- 30723 with e start or e end
 
 SELECT last_name, first_name
 from employees
