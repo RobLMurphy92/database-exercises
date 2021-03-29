@@ -28,9 +28,9 @@ WHERE last_name LIKE 'E%' and last_name LIKE '%E';
 ;
 
 
-SELECT first_name, last_name, hire_date, birth_date,  DATEDIFF(CURDATE(), hire_date) AS 'TOTAL_DAYS_START_TO_NOW'
+SELECT first_name, last_name, hire_date, birth_date,  DATEDIFF(CURDATE(), hire_date) AS 'TOTAL_DAYS_START_TO_NOW', datediff(curdate(), hire_date)/365 AS Years_with_company
 from employees
-WHERE hire_date LIKE '%199%' and birth_date LIKE '%12-25%';
+WHERE hire_date LIKE '199%' and birth_date LIKE '%12-25';
 
 -- 362 records
 ;
@@ -42,7 +42,8 @@ Select *
 from salaries;
 
 select MAX(salary), MIN(salary)
-from salaries;
+from salaries
+where to_date LIKE '9999%';
 
 -- MAX 158220 MIN 38623
 ;
