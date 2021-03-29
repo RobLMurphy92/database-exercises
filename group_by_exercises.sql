@@ -8,7 +8,7 @@ SELECT DISTINCT title
 from titles;
 
 -- 7 unique
-
+;
 
 -- 3.--; 
 /*Write a query to to find a list of all unique last names of all employees that start and end with 'E' using GROUP BY.*/;
@@ -18,7 +18,7 @@ from employees
 WHERE last_name LIKE 'E%E'
 Group BY last_name ASC;
 
--- 5. Records
+-- 5 Records
 ;
 
 
@@ -28,6 +28,9 @@ SELECT last_name, first_name
 FROM employees
 WHERE last_name LIKE 'e%e'
 GROUP BY last_name, first_name;
+
+-- 846 Records.
+;
 
 
 -- 5.---;
@@ -40,6 +43,11 @@ WHERE last_name LIKE '%q%'
 AND last_name NOT LIKE '%qu%'
 GROUP BY last_name ASC;
 
+/*Chleq
+Lindqvist
+Qiwen*/
+;
+
 
 -- 6.--;
 /*Add a COUNT() to your results (the query above) and use ORDER BY to make it easier to find employees whose unusual name is shared with others.*/;
@@ -51,6 +59,11 @@ WHERE last_name Like '%q%' and last_name NOT LIKE '%qu%'
 GROUP BY last_name
 Order By last_name ASC;
 
+/*	Chleq	189
+	Lindqvist	190
+	Qiwen	168*/
+    ;
+
 
 -- 7.--;
 /*Find all all employees with first names 'Irena', 'Vidya', or 'Maya'. Use COUNT(*) and GROUP BY to find the number of employees for each gender with those names.*/;
@@ -59,8 +72,17 @@ from employees
 WHERE first_name IN ('Irena', 'Vidya', 'Maya')
 Group BY gender, first_name;
 
+/*M	Irena	144
+M	Maya	146
+M	Vidya	151
+F	Irena	97
+F	Maya	90
+F	Vidya	81*/
+;
+
 -- 8.--;
-/*Using your query that generates a username for all of the employees, generate a count employees for each unique username. Are there any duplicate usernames? BONUS: How many duplicate usernames are there?*/;
+/*Using your query that generates a username for all of the employees, generate a count employees for each unique username. 
+Are there any duplicate usernames? BONUS: How many duplicate usernames are there?*/;
 
 
 -- Part A
