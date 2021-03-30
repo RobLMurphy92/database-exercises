@@ -7,6 +7,10 @@ use employees;
 SELECT DISTINCT title
 from titles;
 
+SELECT
+	COUNT(DISTINCT title) AS number_of_unique_titles
+	from titles;
+
 -- 7 unique
 ;
 
@@ -18,7 +22,21 @@ from employees
 WHERE last_name LIKE 'E%E'
 Group BY last_name ASC;
 
+SELECT
+	last_name,
+	COUNT(*) AS number_of_employees_with_this_last_name
+from employees
+WHERE last_name LIKE 'E%E'
+GROUP BY last_name;
+
 -- 5 Records
+
+
+/*Eldridge
+Erbe
+Erde
+Erie
+Etalle*/
 ;
 
 
@@ -28,6 +46,19 @@ SELECT last_name, first_name
 FROM employees
 WHERE last_name LIKE 'e%e'
 GROUP BY last_name, first_name;
+
+SELECT last_name, first_name, Count(*) AS number_of_employees
+FROM employees
+WHERE last_name LIKE 'e%e'
+GROUP BY last_name, first_name;
+
+
+SELECT last_name, first_name, Count(*) AS number_of_employees
+FROM employees
+WHERE last_name LIKE 'e%e'
+GROUP BY last_name, first_name
+HAVING number_of_employees > 1
+ORDER BY number_of_employees DESC;
 
 -- 846 Records.
 ;
@@ -41,7 +72,13 @@ SELECT last_name
 FROM employees
 WHERE last_name LIKE '%q%' 
 AND last_name NOT LIKE '%qu%'
-GROUP BY last_name ASC;
+GROUP BY last_name;
+
+SELECT DISTINCT 
+	last_name
+from employees
+WHERE last_name LIKE '%q%' 
+AND last_name NOT LIKE '%qu%';
 
 /*Chleq
 Lindqvist
@@ -64,6 +101,16 @@ Order By last_name ASC;
 	Qiwen	168*/
     ;
 
+    SELECT DISTINCT last_name, COUNT(last_name) AS count_of_names
+from employees
+WHERE last_name Like '%q%' and last_name NOT LIKE '%qu%'
+GROUP BY last_name
+Order By COUNT(last_name) DESC;
+
+/*Lindqvist	190
+Chleq	189
+Qiwen	168*/
+
 
 -- 7.--;
 /*Find all all employees with first names 'Irena', 'Vidya', or 'Maya'. Use COUNT(*) and GROUP BY to find the number of employees for each gender with those names.*/;
@@ -79,6 +126,13 @@ F	Irena	97
 F	Maya	90
 F	Vidya	81*/
 ;
+
+
+select gender, first_name, COUNT(*) AS number_of_employees
+from employees 
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+Group BY gender, first_name
+ORDER BY first_name, number_of_employees;
 
 -- 8.--;
 /*Using your query that generates a username for all of the employees, generate a count employees for each unique username. 
@@ -101,6 +155,19 @@ GROUP BY username;
 -- records 285872
 ;
 
+SELECT 
+LOWER(
+    CONCAT(
+        SUBSTR(first_name,1,1), 
+        SUBSTR(last_name,1,4), 
+        '_', 
+        SUBSTR(birth_date,6,2), 
+        SUBSTR(birth_date,3, 2))) 
+        AS username, count(*) AS number_of_duplicates
+FROM employees
+GROUP BY username
+Order by number_of_duplicates DESC;
+
 -- Bonus---;
 SELECT 
 LOWER(
@@ -116,3 +183,16 @@ GROUP BY username
 HAVING COUNT(username) > 1;
 
 --- 13251 Duplicates;
+
+LOWER(
+    CONCAT(
+        SUBSTR(first_name,1,1), 
+        SUBSTR(last_name,1,4), 
+        '_', 
+        SUBSTR(birth_date,6,2), 
+        SUBSTR(birth_date,3, 2))) 
+        AS username, count(*) AS number_of_duplicates
+FROM employees
+GROUP BY username
+HAVING number_of_duplicates > 1
+ORDER BY number_of_duplicates DESC;
